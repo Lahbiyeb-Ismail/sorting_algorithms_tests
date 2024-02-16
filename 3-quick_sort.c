@@ -65,12 +65,12 @@ int pivot(int *array, int low, int high)
 		{
 			i++;
 			swap(array, i, j);
-			print_array(array, high);
+			print_array(array, high + 1);
 		}
 	}
 
 	swap(array, i + 1, high);
-	print_array(array, high);
+	print_array(array, high + 1);
 
 	return (i + 1);
 }
