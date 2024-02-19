@@ -66,12 +66,19 @@ int pivot(int *array, size_t size, int low, int high)
 		if (array[j] < pivot_value)
 		{
 			i++;
-			swap(array, i, j);
+			if (array[j] != array[i])
+			{
+				swap(array, i, j);
+				print_array(array, size);
+			}
 		}
 	}
 
-	swap(array, i + 1, high);
-	print_array(array, size);
+	if (array[i + 1] != array[high])
+	{
+		swap(array, i + 1, high);
+		print_array(array, size);
+	}
 
 	return (i + 1);
 }
