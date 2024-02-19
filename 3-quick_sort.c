@@ -36,6 +36,7 @@ void swap(int *array, int idx1, int idx2)
  * pivot - Selects a pivot element and partitions an array around it.
  *
  * @array: Pointer to the array of integers.
+ * @size: Size of the array.
  * @low: Index of the first element in the partition.
  * @high: Index of the last element in the partition.
  *
@@ -54,23 +55,23 @@ void swap(int *array, int idx1, int idx2)
  *   The index of the pivot element after partitioning the array.
  */
 
-int pivot(int *array, int low, int high)
+int pivot(int *array, size_t size, int low, int high)
 {
+
 	int pivot_value = array[high];
 	int i = low - 1, j;
 
 	for (j = low; j < high; j++)
 	{
-		if (array[j] <= pivot_value)
+		if (array[j] < pivot_value)
 		{
 			i++;
 			swap(array, i, j);
-			print_array(array, high + 1);
 		}
 	}
 
 	swap(array, i + 1, high);
-	print_array(array, high + 1);
+	print_array(array, size);
 
 	return (i + 1);
 }
@@ -79,6 +80,7 @@ int pivot(int *array, int low, int high)
  * quickSort - Sorts an array of integers using the quick sort algorithm.
  *
  * @array: Pointer to the array of integers to be sorted.
+ * @size: Size of the array.
  * @low: Index of the first element in the partition.
  * @high: Index of the last element in the partition.
  *
@@ -107,14 +109,14 @@ int pivot(int *array, int low, int high)
  * array in place to
  *   sort it in ascending order.
  */
-void quickSort(int *array, int low, int high)
+void quickSort(int *array, size_t size, int low, int high)
 {
 	if (low < high)
 	{
-		int pivot_index = pivot(array, low, high);
+		int pivot_index = pivot(array, size, low, high);
 
-		quickSort(array, low, pivot_index - 1);
-		quickSort(array, pivot_index + 1, high);
+		quickSort(array, size, low, pivot_index - 1);
+		quickSort(array, size, pivot_index + 1, high);
 
 	}
 }
@@ -154,5 +156,5 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size <= 1)
 		return;
 
-	quickSort(array, 0, size - 1);
+	quickSort(array, size, 0, size - 1);
 }
